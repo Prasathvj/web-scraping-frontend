@@ -5,7 +5,9 @@ import Header from './header/Header';
 
 function App() {
   const [products,setProducts] = useState([]);
-  useEffect(()=>{
+
+// Fetch priduct from my-API
+useEffect(()=>{
   async function getProducts(){ 
     const response = await fetch("https://web-scraping-red.vercel.app/products",
     {method:'GET',})

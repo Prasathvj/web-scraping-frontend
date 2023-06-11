@@ -1,4 +1,4 @@
-import React, { useEffect, useState,  } from 'react'
+import React, { useState  } from 'react'
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
@@ -51,11 +51,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 function Header({products,setProducts}) {
-
-
   const [query,setQuery] = useState('');
 
-  //1.
+  //1.pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 4;
 
@@ -84,6 +82,7 @@ function Header({products,setProducts}) {
 
  // Calculate total number of pages
  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
   // Generate pagination buttons
   const paginationButtons = [];
   for (let i = 1; i <= totalPages; i++) {
@@ -108,7 +107,6 @@ function Header({products,setProducts}) {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              // onChange={(e)=>setQuery(e.target.value)}
               value={query}
               onChange={handleSearchChange}
 
@@ -120,8 +118,6 @@ function Header({products,setProducts}) {
           </div>
           
           <div className="all-products">
-            {/* { products.filter((productss)=>
-            productss.title.toLowerCase().includes(query)).map((product, idx)=> */}
             {currentProducts.map((product, idx) => (
             <div className="product" key={idx}>
               <h3 className='source'>{product.source}</h3>
@@ -135,8 +131,8 @@ function Header({products,setProducts}) {
                   <p className="p2"><s>{product.discountPrice}</s></p>
                   <p className="p3">{product.offer}</p>
                 </div>
-                {/* <p className="product-btn">Buy now</p> */}
-
+                <a className='link1' rel='noopener noreferrer' href={product.productlink} target='_blank'>
+                  Check Me-<span className='link-product'>{product.source}</span></a>
               </div>
             </div>
             ))}      
